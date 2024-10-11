@@ -20,7 +20,7 @@ class GetCatsImageUseCase {
       yield Resource.success(cats);
     } catch (e) {
       // Handle any other exceptions
-      yield Resource.error("An unexpected error occurred.");
+      yield Resource.error(e.toString());
     }
   }
 }

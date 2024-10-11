@@ -1,5 +1,5 @@
 class Cat {
-  final List<Breed> breeds;
+  final List<Breed>? breeds;
   final String id;
   final String url;
   final int width;
@@ -12,15 +12,16 @@ class Cat {
       required this.width,
       required this.height});
 
+ // Parsing from JSON
   factory Cat.fromJson(Map<String, dynamic> json) {
     return Cat(
-      breeds: (json['breed'] as List)
-          .map((breed) => Breed.fromJson(breed as Map<String, dynamic>))
+      breeds: (json['breeds'] as List<dynamic>?)
+          ?.map((breed) => Breed.fromJson(breed as Map<String, dynamic>))
           .toList(),
-      id: json['id'] as String,
-      url: json['url'] as String,
-      width: json['width'] as int,
-      height: json['height'] as int,
+      id: json['id'] ?? '',
+      url: json['url'] ?? '',
+      width: json['width'] ?? 0,
+      height: json['height'] ?? 0,
     );
   }
 }
@@ -28,7 +29,7 @@ class Cat {
 class Breed {
   final String id;
   final String name;
-  final String temperement;
+  final String temperament;
   final String origin;
   final String lifeSpan;
   final String? wikipediaURL;
@@ -37,20 +38,22 @@ class Breed {
   Breed(
       {required this.id,
       required this.name,
-      required this.temperement,
+      required this.temperament,
       required this.origin,
       required this.lifeSpan,
       required this.wikipediaURL,
       required this.description});
 
+  // Parsing from JSON
   factory Breed.fromJson(Map<String, dynamic> json) {
     return Breed(
-        id: json['id'] as String,
-        name: json['name'] as String,
-        temperement: json['temperement'] as String,
-        origin: json['origin'] as String,
-        lifeSpan: json['life_span'] as String,
-        wikipediaURL: json['wifipedia_url'] as String,
-        description: json['description'] as String);
+      id: json['id'] ?? '',
+      name: json['name'] ?? '',
+      temperament: json['temperament'] ?? '',
+      origin: json['origin'] ?? '',
+      lifeSpan: json['life_span'] ?? '',
+      wikipediaURL: json['wikipedia_url'],
+      description: json['description'] ?? '',
+    );
   }
 }

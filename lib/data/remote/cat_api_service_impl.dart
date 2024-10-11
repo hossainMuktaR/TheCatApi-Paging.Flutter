@@ -15,29 +15,35 @@ class CatApiServiceImpl implements CatApiService {
   @override
   Future<List<Cat>> getCats(int page, int limit) async {
     try {
-      final url = Uri.parse(CatApiRoutes.getCats)
-      .replace(queryParameters: {
+      final url = Uri.parse(CatApiRoutes.getCats).replace(queryParameters: {
         'has_breeds': 'true',
         'page': page.toString(),
         'limit': limit.toString(),
       });
 
-      final response = await client.get(
-        url,
-        headers: {
-          'x-api-key':  Constant.apikey,
-        });
+      debugPrint('request url: $url');
+
+      final response = await client.get(url, headers: {
+        'x-api-key': Constant.apikey,
+      });
       if (response.statusCode == 200) {
-        final List<dynamic> json = jsonDecode(response.body);
-        return json
-            .map((item) => Cat.fromJson(item as Map<String, dynamic>))
-            .toList();
+        if (response.body.isNotEmpty) {
+          debugPrint('${response.body.toString()}');
+          final List<dynamic> json = jsonDecode(response.body) as List<dynamic>;
+          return json
+              .map((item) => Cat.fromJson(item as Map<String, dynamic>))
+              .toList();
+        } else {
+          // Handle the case where the body is empty
+          debugPrint('Response body is empty');
+          throw Exception('Response body is empty');
+        }
       } else {
-        throw Exception("error on response");
+        throw Exception('Error: Status code ${response.statusCode}');
       }
     } catch (e) {
       debugPrint(e.toString());
-      throw Exception("Faild to Load Cat");
+      throw Exception('Failed to load cats');
     }
   }
 }
