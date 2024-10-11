@@ -29,10 +29,10 @@ class CatListViewModel extends ChangeNotifier {
       // Handle different resource states
       switch (resource.state) {
         case ResourceState.loading:
-          isLoading = true;
+          // isLoading = true;
           break;
         case ResourceState.success:
-          _cats = resource.data ?? [];
+          _cats = cats + (resource.data ?? []);
           isLoading = false;
           if (resource.data!.length < limit) {
             canLoadMorePages = false;
