@@ -24,7 +24,7 @@ class CatApiServiceImpl implements CatApiService {
       debugPrint('request url: $url');
 
       final response = await client.get(url, headers: {
-        'x-api-key': Constant.apikey,
+        'x-api-key': Constant.apikey ?? "null",
       });
       if (response.statusCode == 200) {
         if (response.body.isNotEmpty) {
