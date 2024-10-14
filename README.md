@@ -22,9 +22,11 @@ This Flutter application demonstrates the integration of The Cat API with pagina
 
 ## Screenshots
 
-![List Screen](docs/thecatapi-list-screen.png)
-![Details Screen](docs/thecatapi-details-screen.png)
-![App Preview](docs/catapi-app-preview.gif)
+<img src="docs/thecatapi-list-screen.png" alt="List Screen" width="300"/>
+
+<img src="docs/thecatapi-details-screen.png" alt="Details Screen" width="300"/>
+
+<img src="docs/catapi-app-preview.gif" alt="App Preview" width="300"/>
 
 ## API Key Setup
 
@@ -32,9 +34,9 @@ To run this application, you will need an API key from [The Cat API](https://the
 
 1. Get your API key from [The Cat API](https://thecatapi.com/).
 2. Add the API key in the `.env.example` file:
-   \`\`\`
+   ```
    API_KEY=your_api_key_here
-   \`\`\`
+   ```
  3. Rename .env.example -> .env.
 
 ## How It Works
